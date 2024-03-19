@@ -8,6 +8,10 @@ const Email = require('../models/email.model')
 
 const sendMailer = require('../middleware/sendmail');
 
+
+adminSecret = "my_admin_Secret_key_123490120";
+userSecret = "my_user_Secret_key_123490120"
+
 ///////////////////////////////////////// Admin authentication /////////////////////////////////////////
 
 module.exports.adminReg = async(req,res)=>{
@@ -58,7 +62,7 @@ module.exports.adminLogin =async(req,res)=>{
         return res.status(200).json({message:'incorrect_input'});
     }
 
-    jwt.sign({adminId:findAdmin._id,username:findAdmin.username},process.env.ADMIN_SECRET,(err,token)=>{
+    jwt.sign({adminId:findAdmin._id,username:findAdmin.username},adminSecret,(err,token)=>{
         if(err){
             console.log(err);
             return res.status(200).json({message:'error'});
@@ -116,7 +120,7 @@ module.exports.userLogin =async(req,res)=>{
         return res.status(200).json({message:'incorrect_input'});
     }
 
-    jwt.sign({userid:findUser._id,username:findUser.username},process.env.USER_SECRET,(err,token)=>{
+    jwt.sign({userid:findUser._id,username:findUser.username},userSecret,(err,token)=>{
         if(err){
             console.log(err);
             return res.status(200).json({message:'error'});

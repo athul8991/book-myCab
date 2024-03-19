@@ -1,11 +1,14 @@
 const nodemailer = require('nodemailer');
 
+const UserName ="frnds4future@gmail.com";
+const Pass = "jzvo zelm czpp azig";
+
 const transport = nodemailer.createTransport({
     service: 'gmail',
     auth:{
 
-        user:process.env.USER_NAME,
-        pass:process.env.EMAIL_PASS
+        user:UserName,
+        pass:Pass
     }
 });
 
@@ -24,7 +27,7 @@ module.exports.sendMail = (mailoption)=>{
 module.exports.mailoption ={
     from:{
         name:'BookMyCab',
-        address:process.env.USER_NAME
+        address:UserName
     },
     to:'',
     subject:'',

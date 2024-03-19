@@ -21,22 +21,16 @@ app.use(bodyParser.json());
 app.use(express.static('./uploads'))
 app.use(express.static('./client/browser'));
 
-
-app.get('/',(req,res)=>{
-    console.log(req.hostname);
-    res.status(200).json({message:'success'})
-})
-
 app.use('/api/auth',authRoutes);
 app.use('/api/admin',verifyController.adminVerify,adminRoutes);
 app.use('/api/user',verifyController.userVerify,userRoutes);
 app.use('/api/common',commonRoutes);
-app.use('/',(req,res)=>{
-    res.send(path.join(__dirname,'client/browser/index.html'));
+app.use('*',(req,res)=>{
+    res.sendFile(path.join(__dirname,'client/browser/index.html'));
 })
 
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8000;
 app.listen(port,()=>{
     console.log(`Server run @${port}`);
 })

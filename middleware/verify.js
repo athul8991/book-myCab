@@ -1,4 +1,8 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
+
+adminSecret="my_admin_Secret_key_123490120";
+userSecret = "my_user_Secret_key_123490120";
+
 module.exports.adminVerify =async (req,res,next)=>{
     const token = req.headers.authorization;
 
@@ -6,7 +10,7 @@ module.exports.adminVerify =async (req,res,next)=>{
         return res.status(200).json({message:'no_token'});
     }
 
-    jwt.verify(token,process.env.ADMIN_SECRET,(err,decode)=>{
+    jwt.verify(token,adminSecret,(err,decode)=>{
         if(err){
             console.log(err);
             return res.status(200).json({message:'invalid_token'});
@@ -26,7 +30,7 @@ module.exports.userVerify =async (req,res,next)=>{
         return res.status(200).json({message:'no_token'});
     }
 
-    jwt.verify(token,process.env.USER_SECRET,(err,decode)=>{
+    jwt.verify(token,userSecret,(err,decode)=>{
         if(err){
             console.log(err);
             return res.status(200).json({message:'invalid_token'});
